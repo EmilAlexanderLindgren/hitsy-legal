@@ -1,2 +1,2 @@
 # hitsy-legal
-egal pages for the Hitsy iOS app.
+legal pages for the Hitsy iOS app.
