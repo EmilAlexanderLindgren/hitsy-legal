@@ -3,46 +3,102 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hitsy</title>
+<title>Hitsy – Music Party Game</title>
+<meta name="description" content="Hitsy is a music party game for iPhone and iPad. Hear a song, place it on the timeline in the right year, and be the first to get ten cards in a row.">
+<link rel="icon" href="img/icon.png">
 <style>
-  :root { color-scheme: light dark; }
+  :root { color-scheme: light dark; --muted: #6b6b70; --line: #e2e2e6; --link: #0a66d6; }
+  @media (prefers-color-scheme: dark) {
+    :root { --muted: #9a9aa2; --line: #3a3a40; --link: #7cb8ff; }
+    body { color: #ececef; background: #121214; }
+  }
+  * { box-sizing: border-box; }
   body {
     font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    max-width: 34rem; margin: 0 auto; padding: 4rem 1.25rem;
+    max-width: 38rem; margin: 0 auto; padding: 3.5rem 1.25rem 4rem;
     color: #1c1c1e; background: #fff;
   }
-  @media (prefers-color-scheme: dark) {
-    body { color: #ececef; background: #121214; }
-    a { color: #7cb8ff; }
-    li { border-color: #3a3a40; }
+  a { color: var(--link); }
+  header { display: flex; gap: 1.2rem; align-items: center; }
+  header img { width: 88px; height: 88px; border-radius: 20px; flex: none; }
+  h1 { font-size: 2.2rem; line-height: 1.1; margin: 0 0 .3rem; }
+  p.tagline { color: var(--muted); margin: 0; }
+  .cta {
+    display: inline-block; margin: 1.8rem 0 .4rem; padding: .75rem 1.4rem;
+    background: #1c1c1e; color: #fff; border-radius: 12px; text-decoration: none; font-weight: 600;
   }
-  h1 { font-size: 2.2rem; margin-bottom: .2rem; }
-  p.tagline { color: #6b6b70; margin-top: 0; }
-  ul { list-style: none; padding: 0; margin-top: 2.5rem; }
-  li { border-top: 1px solid #e2e2e6; }
-  li:last-child { border-bottom: 1px solid #e2e2e6; }
-  li a { display: block; padding: 1rem .25rem; text-decoration: none; font-weight: 600; }
-  li a:hover { text-decoration: underline; }
-  li span { display: block; font-weight: 400; color: #6b6b70; font-size: .92rem; }
+  @media (prefers-color-scheme: dark) { .cta { background: #ececef; color: #121214; } }
+  .small { color: var(--muted); font-size: .9rem; margin: 0; }
+  h2 { font-size: 1.25rem; margin: 2.6rem 0 .5rem; }
+  ol, ul.plain { padding-left: 1.2rem; margin: .5rem 0; }
+  li { margin: .35rem 0; }
+  ul.links { list-style: none; padding: 0; margin: 1rem 0 0; }
+  ul.links li { border-top: 1px solid var(--line); margin: 0; }
+  ul.links li:last-child { border-bottom: 1px solid var(--line); }
+  ul.links a { display: block; padding: 1rem .25rem; text-decoration: none; font-weight: 600; }
+  ul.links a:hover { text-decoration: underline; }
+  ul.links span { display: block; font-weight: 400; color: var(--muted); font-size: .92rem; }
+  footer { margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .88rem; }
+  footer p { margin: .3rem 0; }
 </style>
 </head>
 <body>
 
-<h1>Hitsy</h1>
-<p class="tagline">Song quiz — guess the year. A music party game for iPhone and iPad.</p>
+<header>
+  <img src="img/icon.png" alt="Hitsy app icon">
+  <div>
+    <h1>Hitsy</h1>
+    <p class="tagline">Music Party Game for iPhone and iPad.<br>Hör låten. Gissa året.</p>
+  </div>
+</header>
 
-<ul>
+<a class="cta" href="https://apps.apple.com/app/apple-store/id6758674483">Download on the App Store</a>
+<p class="small">Free to download. Available in English and Swedish.</p>
+
+<h2>How it works</h2>
+<ol>
+  <li>A song plays. You don't see the title, the artist or the year.</li>
+  <li>Place its card on your timeline, before or after the cards you already have.</li>
+  <li>Flip it. A correct placement keeps the card; a wrong one doesn't.</li>
+  <li>The first player to place ten cards correctly wins.</li>
+</ol>
+
+<h2>Play your way</h2>
+<ul class="plain">
+  <li><strong>Pass and play:</strong> 2–6 players around one phone.</li>
+  <li><strong>Local multiplayer:</strong> play on each other's devices over Multipeer Connectivity, with no account and no sign-up.</li>
+  <li><strong>Card packs:</strong> Hits, Summer Bops, Party Anthems, Guilty Pleasures, Karaoke Bangers, Britpop, Europop, Film &amp; TV and more, each with its own look.</li>
+  <li><strong>Dagens Hitsy:</strong> one new challenge a day, the same songs for everyone, with a result you can share.</li>
+  <li><strong>Abilities:</strong> earn stars from bonus challenges and spend them on a clue or a skip.</li>
+</ul>
+
+<h2>Music</h2>
+<p>Hitsy plays songs through Apple Music. With an Apple Music subscription you hear full songs; without one you hear 30-second previews. Every card has a link to open the song in Apple Music. Apple Music is a trademark of Apple Inc.</p>
+
+<h2>Help and legal</h2>
+<ul class="links">
   <li>
     <a href="support.html">Support
-      <span>Contact, common questions, subscription help — English and Swedish</span>
+      <span>Contact, common questions and purchase help. English and Swedish</span>
     </a>
   </li>
   <li>
     <a href="privacy.html">Privacy Policy
-      <span>Integritetspolicy — English and Swedish</span>
+      <span>Integritetspolicy. English and Swedish</span>
+    </a>
+  </li>
+  <li>
+    <a href="mailto:thehitsyapp@gmail.com">thehitsyapp@gmail.com
+      <span>Questions, feedback or business enquiries</span>
     </a>
   </li>
 </ul>
+
+<footer>
+  <p>Hitsy is developed by Emil Alexander Lindgren, a sole trader (enskild firma) registered in Sweden.</p>
+  <p>VAT no. SE010420021701</p>
+  <p>Not affiliated with or endorsed by Apple Inc. or any artist or label.</p>
+</footer>
 
 </body>
 </html>
