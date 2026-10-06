@@ -34,14 +34,15 @@
 <body>
 
 <h1>Privacy Policy — Hitsy</h1>
-<p class="updated">Last updated: 3 October 2026</p>
+<p class="updated">Last updated: 6 October 2026</p>
 
 <div class="lead">
   <strong>Hitsy has no accounts and no advertising inside the game.</strong> We collect
   first-party installation, purchase and game statistics, described below, under a random
-  identifier and delete those records after 18 months. If you allow tracking in Apple's system
-  prompt, we also share installation and session activity and device identifiers with Meta to
-  measure our Facebook and Instagram ads. You can play the full game without allowing tracking.
+  identifier and delete those records after 18 months. We also report installs and sessions to
+  Meta to measure our Facebook and Instagram ads; only if you allow tracking in Apple's system
+  prompt does that include your device's advertising identifier. You can play the full game
+  without allowing tracking.
 </div>
 
 <h2>Who we are</h2>
@@ -116,22 +117,24 @@
 <p>
   <strong>None of it is linked to your name, email address or Apple Account, and we cannot identify
   you from it.</strong> These first-party records are not sent to Meta, combined with third-party
-  records or sold. The optional Meta measurement below is separate.
+  records or sold. The Meta measurement below is separate.
 </p>
 <p>
   These records are held in our own database, hosted by Supabase in Stockholm, in the EU.
   <strong>They are deleted automatically 18 months after they are written.</strong>
 </p>
 
-<h2>Optional Meta advertising measurement</h2>
-<p>With your permission through Apple's tracking prompt, Hitsy initializes the Meta SDK and
-reports app installs and sessions to Meta, together with advertising/device identifiers and
-technical information such as app version, device characteristics, locale and network metadata.
-Meta may also receive diagnostic information about crashes in its SDK. Meta can match these
-signals to activity on its services to measure our ads. We do not send player names, photos,
-answers, music history or purchase events to Meta.</p>
-<p>If you decline or are not eligible to allow tracking, the Meta SDK is not initialized.
-Apple's SKAdNetwork can still provide aggregate installation attribution without sharing a
+<h2>Meta advertising measurement</h2>
+<p>Once you have answered Apple's tracking prompt, Hitsy starts the Meta SDK and reports app
+installs and sessions to Meta, together with technical information such as app version, device
+characteristics, locale and network metadata. Meta may also receive diagnostic information about
+crashes in its SDK. We do not send player names, photos, answers, music history or purchase
+events to Meta.</p>
+<p>If you allow tracking, these reports also carry your device's advertising identifier, and Meta
+can match them to activity on its services to measure our ads. If you decline, no advertising
+identifier is sent, and Meta uses the reports only in aggregate (its Aggregated Event
+Measurement). If Apple reports tracking as restricted on your device, the Meta SDK is not started
+at all. Apple's SKAdNetwork can also provide aggregate installation attribution without sharing a
 tracking identifier with us. You can change your choice in iOS Settings → Privacy &amp; Security
 → Tracking. Tracking permission does not affect gameplay.</p>
 <p>Meta handles the data it receives according to its
@@ -166,7 +169,8 @@ not to Meta's records.</p>
 <p>
   Hitsy is rated 13+ because it plays commercially released popular music, whose lyrics are not
   under our control. Our first-party records contain no name, age, contact detail or location.
-  Meta measurement is disabled whenever Apple reports tracking as restricted or denied.
+  The Meta SDK is not started when Apple reports tracking as restricted, and no advertising
+  identifier is shared with Meta unless tracking is allowed.
 </p>
 
 <h2>How long we keep it, and your rights</h2>
@@ -203,15 +207,15 @@ not to Meta's records.</p>
 <hr>
 
 <h1>Integritetspolicy — Hitsy</h1>
-<p class="updated">Senast uppdaterad: 3 oktober 2026</p>
+<p class="updated">Senast uppdaterad: 6 oktober 2026</p>
 
 <div class="lead">
   <strong>Hitsy har inga konton och ingen reklam inuti spelet.</strong> Vi samlar in egen
   installations-, köp- och spelstatistik enligt beskrivningen nedan, under en slumpad
-  identifierare, och raderar dessa uppgifter efter 18 månader. Om du tillåter spårning i Apples
-  systemdialog delar vi även installations- och sessionsaktivitet samt enhetsidentifierare med
-  Meta för att mäta våra Facebook- och Instagramannonser. Du kan spela hela spelet utan att
-  tillåta spårning.
+  identifierare, och raderar dessa uppgifter efter 18 månader. Vi rapporterar även installationer
+  och appsessioner till Meta för att mäta våra Facebook- och Instagramannonser; enhetens
+  annonsidentifierare följer bara med om du tillåter spårning i Apples systemdialog. Du kan spela
+  hela spelet utan att tillåta spårning.
 </div>
 
 <h2>Vem vi är</h2>
@@ -286,22 +290,24 @@ not to Meta's records.</p>
 <p>
   <strong>Inget av detta kopplas till ditt namn, din e-postadress eller ditt Apple-konto, och vi kan
   inte identifiera dig utifrån det.</strong> Dessa egna uppgifter skickas inte till Meta,
-  sammanförs inte med tredjepartsuppgifter och säljs inte. Den valfria Meta-mätningen nedan är separat.
+  sammanförs inte med tredjepartsuppgifter och säljs inte. Meta-mätningen nedan är separat.
 </p>
 <p>
   Uppgifterna finns i vår egen databas, som driftas av Supabase i Stockholm, inom EU.
   <strong>De raderas automatiskt 18 månader efter att de skrevs.</strong>
 </p>
 
-<h2>Valfri annonsmätning med Meta</h2>
-<p>Om du godkänner Apples spårningsförfrågan startar Hitsy Meta SDK och rapporterar installationer
- och appsessioner till Meta, tillsammans med annons-/enhetsidentifierare och tekniska uppgifter
- som appversion, enhetsegenskaper, språk och nätverksmetadata. Meta kan även få diagnostik om
- krascher i sin SDK. Meta kan matcha signalerna med aktivitet i sina tjänster för att mäta våra
- annonser. Vi skickar inte spelarnamn, bilder, svar, musikhistorik eller köphändelser till Meta.</p>
-<p>Om du nekar eller inte får tillåta spårning startas inte Meta SDK. Apples SKAdNetwork kan
- fortfarande ge aggregerad installationsmätning utan att dela någon spårningsidentifierare med
- oss. Du kan ändra ditt val i iOS Inställningar → Integritet och säkerhet → Spårning.
+<h2>Annonsmätning med Meta</h2>
+<p>När du har svarat på Apples spårningsförfrågan startar Hitsy Meta SDK och rapporterar
+ installationer och appsessioner till Meta, tillsammans med tekniska uppgifter som appversion,
+ enhetsegenskaper, språk och nätverksmetadata. Meta kan även få diagnostik om krascher i sin SDK.
+ Vi skickar inte spelarnamn, bilder, svar, musikhistorik eller köphändelser till Meta.</p>
+<p>Om du tillåter spårning följer enhetens annonsidentifierare med, och Meta kan matcha
+ rapporterna med aktivitet i sina tjänster för att mäta våra annonser. Om du nekar skickas ingen
+ annonsidentifierare, och Meta använder rapporterna bara sammanställda (Metas Aggregated Event
+ Measurement). Om Apple anger att spårning är begränsad på enheten startas Meta SDK inte alls.
+ Apples SKAdNetwork kan dessutom ge aggregerad installationsmätning utan att dela någon
+ spårningsidentifierare med oss. Du kan ändra ditt val i iOS Inställningar → Integritet och säkerhet → Spårning.
  Spårningstillstånd påverkar inte spelet.</p>
 <p>Meta hanterar uppgifterna enligt sin
 <a href="https://www.facebook.com/privacy/policy/">integritetspolicy</a>, inklusive lagringstid
@@ -335,7 +341,8 @@ not to Meta's records.</p>
 <p>
   Hitsy har åldersgränsen 13+ eftersom appen spelar kommersiellt utgiven populärmusik vars texter
   vi inte råder över. Våra egna statistikuppgifter innehåller varken namn, ålder, kontaktuppgift
-  eller plats. Meta-mätningen är avstängd när Apple anger att spårning är begränsad eller nekad.
+  eller plats. Meta SDK startas inte när Apple anger att spårning är begränsad, och ingen
+  annonsidentifierare delas med Meta om du inte tillåter spårning.
 </p>
 
 <h2>Hur länge vi sparar, och dina rättigheter</h2>
