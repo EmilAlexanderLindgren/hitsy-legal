@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Hitsy – Hör låten. Gissa året.</title>
-<meta name="description" content="Hitsy är musikspelet för förfesten. Lyssna på låten, lägg kortet rätt i tiden och bli först till tio kort. För iPhone och iPad.">
+<title>Hitsy – Hear the song. Guess the year.</title>
+<meta name="description" content="Hitsy is the music party game. Hear the song, put the card in the right place on the timeline and be first to ten cards. For iPhone and iPad.">
 <meta name="theme-color" content="#06050f">
-<meta property="og:title" content="Hitsy – Hör låten. Gissa året.">
-<meta property="og:description" content="Musikspelet för förfesten. 4 000+ kort, 10+ kortlekar, 2–6 spelare.">
+<meta property="og:title" content="Hitsy – Hear the song. Guess the year.">
+<meta property="og:description" content="The music party game. 4,000+ cards, 10+ packs, 2–6 players.">
 <meta property="og:image" content="https://hitsy.se/assets/og.jpg">
 <meta property="og:url" content="https://hitsy.se/">
 <meta property="og:type" content="website">
@@ -217,9 +217,9 @@
 </div>
 
 <header>
-  <div class="lang" role="group" aria-label="Språk / Language">
-    <button type="button" data-set-lang="sv" aria-pressed="true">SV</button>
-    <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+  <div class="lang" role="group" aria-label="Language / Språk">
+    <button type="button" data-set-lang="sv" aria-pressed="false">SV</button>
+    <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
   </div>
 </header>
 
@@ -227,10 +227,10 @@
   <section class="hero">
     <img class="logo" src="assets/logo.webp" alt="Hitsy" width="1100" height="593" fetchpriority="high">
     <h1>
-      <span class="line shade"><span class="rise ln plain" data-i18n="h1a">Hör låten.</span></span>
-      <span class="line glow"><span class="rise ln accent"><span class="gw" data-i18n="h1b">Gissa året.</span></span></span>
+      <span class="line shade"><span class="rise ln plain" data-i18n="h1a">Hear the song.</span></span>
+      <span class="line glow"><span class="rise ln accent"><span class="gw" data-i18n="h1b">Guess the year.</span></span></span>
     </h1>
-    <p class="kick" data-i18n="kick">Lyssna på låten. Gissa året. Vinn.</p>
+    <p class="kick" data-i18n="kick">Listen. Guess the year. Win.</p>
 
     <div class="stage" id="stage" aria-hidden="true">
       <div class="floor"></div>
@@ -246,11 +246,11 @@
     </div>
 
     <div class="act">
-      <a class="badge" href="https://apps.apple.com/app/apple-store/id6758674483?pt=128462872&amp;ct=hitsy_se&amp;mt=8" aria-label="Hämta i App Store">
-        <img data-badge alt="Hämta i App Store" src="assets/badge/appstore_sv.svg" width="175" height="58">
+      <a class="badge" href="https://apps.apple.com/app/apple-store/id6758674483?pt=128462872&amp;ct=hitsy_se&amp;mt=8" aria-label="Download on the App Store">
+        <img data-badge alt="Download on the App Store" src="assets/badge/appstore_en.svg" width="175" height="58">
       </a>
       <div class="chips">
-        <span data-i18n="c1">4 000+ kort</span><span data-i18n="c2">10+ kortlekar</span><span data-i18n="c3">2–6 spelare</span>
+        <span data-i18n="c1">4,000+ cards</span><span data-i18n="c2">10+ packs</span><span data-i18n="c3">2–6 players</span>
       </div>
     </div>
   </section>
@@ -258,24 +258,24 @@
 
   <section class="packs">
     <h2 class="reveal">
-      <span class="ln plain" data-i18n="p1">En kortlek</span>
-      <span class="ln accent"><span class="gw" data-i18n="p2">för varje fest</span></span>
+      <span class="ln plain" data-i18n="p1">A pack</span>
+      <span class="ln accent"><span class="gw" data-i18n="p2">for every party</span></span>
     </h2>
-    <div class="reel" aria-label="Kortlekar">
+    <div class="reel" aria-label="Packs">
       <div class="track" id="track"></div>
     </div>
-    <p class="free reveal" data-i18n="free">Hits-kortleken är alltid gratis · Första matchen i varje kortlek är gratis</p>
+    <p class="free reveal" data-i18n="free">The Hits pack is always free · Your first game of every pack is free</p>
   </section>
 </main>
 
 <footer>
   <nav>
     <a href="support.html" data-i18n="support">Support</a>
-    <a href="privacy.html" data-i18n="privacy">Integritetspolicy</a>
+    <a href="privacy.html" data-i18n="privacy">Privacy Policy</a>
     <a href="mailto:info@hitsy.se">info@hitsy.se</a>
   </nav>
-  <p data-i18n="legal">Hitsy görs av Emil Alexander Lindgren, enskild firma i Sverige · Momsnr SE010420021701</p>
-  <p data-i18n="tm">Apple, App Store och Apple Music är varumärken som tillhör Apple Inc.</p>
+  <p data-i18n="legal">Hitsy is made by Emil Alexander Lindgren, a sole trader in Sweden · VAT no. SE010420021701</p>
+  <p data-i18n="tm">Apple, App Store and Apple Music are trademarks of Apple Inc.</p>
 </footer>
 
 <script>
@@ -315,11 +315,14 @@
     document.querySelectorAll('[data-year]').forEach((el) => { el.src = front(el.dataset.year); });
     document.querySelectorAll('[data-badge]').forEach((el) => { el.src = `assets/badge/appstore_${l}.svg`; el.alt = d.badge; el.parentElement.setAttribute('aria-label', d.badge); });
     document.querySelectorAll('[data-set-lang]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.setLang === l)));
-    try { localStorage.setItem('hitsy.lang', l); } catch (e) {}
   }
-  document.querySelectorAll('[data-set-lang]').forEach((b) => b.addEventListener('click', () => setLang(b.dataset.setLang)));
-  try { lang = localStorage.getItem('hitsy.lang'); } catch (e) {}
-  if (!T[lang]) lang = /^(sv|nb|no|nn|da|fi)\b/i.test(navigator.language || '') ? 'sv' : 'en';
+  // English by default; Swedish only when the visitor picks it, and then that choice is remembered
+  document.querySelectorAll('[data-set-lang]').forEach((b) => b.addEventListener('click', () => {
+    setLang(b.dataset.setLang);
+    try { localStorage.setItem('hitsy.lang.picked', b.dataset.setLang); } catch (e) {}
+  }));
+  try { lang = localStorage.getItem('hitsy.lang.picked'); } catch (e) {}
+  if (!T[lang]) lang = 'en';
   setLang(lang);
 
   // the timeline leans toward the pointer
