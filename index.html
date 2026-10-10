@@ -30,9 +30,7 @@
     --pink: #ff6ad9;
     --violet: #b77bff;
     --cyan: #3fe0ff;
-    --mint: #43e8a7;
-    --red: #ff5a7a;
-    --grad: linear-gradient(95deg, #ff6ad9 0%, #b77bff 45%, #3fe0ff 100%);
+      --grad: linear-gradient(95deg, #ff6ad9 0%, #b77bff 45%, #3fe0ff 100%);
     --card-r: 11.9% / 8%;
   }
   * { box-sizing: border-box; }
@@ -106,19 +104,17 @@
   .hero .kick { margin-top: clamp(10px, 2vh, 26px); opacity: 0; animation: fade .8s ease .95s forwards; }
   @keyframes fade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 
-  /* the timeline: tilted, running off both edges and fading into the sky, the mystery card lit and lifted */
-  .stage { position: relative; width: 100%; margin-top: clamp(4px, 2vh, 36px); perspective: 1400px;
-           -webkit-mask: linear-gradient(90deg, transparent 0, #000 14%, #000 86%, transparent 100%); mask: linear-gradient(90deg, transparent 0, #000 14%, #000 86%, transparent 100%); }
-  .row { --w: clamp(96px, min(12.4vw, 17vh), 178px); --gap: calc(var(--w) * .13);
+  /* the timeline: tilted, every card on screen, the mystery card lit and lifted */
+  /* The cards are sized to fit the screen, so nothing runs off an edge, and there is no mask to clip the glow. */
+  .stage { position: relative; width: 100%; margin-top: clamp(4px, 2vh, 36px); perspective: 1400px; pointer-events: none; }
+  .row { --w: clamp(84px, min(11.2vw, 17vh), 178px); --gap: calc(var(--w) * .13);
          display: flex; justify-content: center; align-items: center; gap: var(--gap); padding: calc(var(--w) * .3) 0;
          transform: rotate(-5deg) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .4s ease-out; transform-style: preserve-3d; }
   .card { flex: none; width: var(--w); aspect-ratio: 540 / 800; position: relative;
           opacity: 0; transform: translateY(60px) scale(.92); animation: deal .9s cubic-bezier(.2,.9,.25,1.1) forwards; }
   .card img { width: 100%; height: 100%; border-radius: var(--card-r); filter: drop-shadow(0 22px 34px rgba(0,0,0,.55)); }
-  .row .card:nth-child(1) { animation-delay: .7s; }  .row .card:nth-child(2) { animation-delay: .78s; }
-  .row .card:nth-child(3) { animation-delay: .86s; } .row .card:nth-child(4) { animation-delay: .94s; }
-  .row .card:nth-child(6) { animation-delay: .98s; } .row .card:nth-child(7) { animation-delay: 1.06s; }
-  .row .card:nth-child(8) { animation-delay: 1.14s; } .row .card:nth-child(9) { animation-delay: 1.22s; }
+  .row .card:nth-child(1) { animation-delay: .78s; } .row .card:nth-child(2) { animation-delay: .86s; } .row .card:nth-child(3) { animation-delay: .94s; }
+  .row .card:nth-child(5) { animation-delay: .98s; } .row .card:nth-child(6) { animation-delay: 1.06s; } .row .card:nth-child(7) { animation-delay: 1.14s; }
   @keyframes deal { to { opacity: 1; transform: none; } }
   /* the card rests where the float begins (lifted, turned), so the float picks up without a jump */
   .card.mystery { width: calc(var(--w) * 1.12); z-index: 2; translate: 0 -8%; rotate: -4deg; animation: deal .9s cubic-bezier(.2,.9,.25,1.1) 1.35s forwards, float 5s ease-in-out 2.3s infinite; }
@@ -128,9 +124,10 @@
   .lit::after { content: ""; position: absolute; inset: 0; border-radius: var(--card-r); pointer-events: none;
                 box-shadow: 0 0 .9em .15em rgba(255,255,255,.55), inset 0 0 0 .16em rgba(255,255,255,.9), inset 0 .2em .45em .2em rgba(255,255,255,.7), inset 0 0 1.2em .3em rgba(255,235,255,.25); }
   .row .lit::after { font-size: calc(var(--w) / 12); }
-  .row .far, .row .edge { display: none; }
+  /* seven cards on a wide screen, five in between, three on a phone; each step resized to fit */
+  .row .edge { display: none; }
   @media (min-width: 900px) { .row .edge { display: block; } }
-  @media (min-width: 1300px) { .row .far { display: block; } }
+  @media (min-width: 701px) and (max-width: 899px) { .row { --w: clamp(84px, min(17vw, 17vh), 178px); } }
   .floor { position: absolute; left: 50%; bottom: 0; width: 110%; height: 50%; transform: translateX(-50%); pointer-events: none;
            background: radial-gradient(closest-side, rgba(139,92,246,.32), rgba(139,92,246,0)); filter: blur(6px); }
 
@@ -150,64 +147,6 @@
   .chips span:nth-child(1) { --a: #ff6ad9; --b: #d572ff; box-shadow: 0 0 22px rgba(255,106,217,.3); }
   .chips span:nth-child(2) { --a: #c878ff; --b: #8d9cff; box-shadow: 0 0 22px rgba(183,123,255,.3); }
   .chips span:nth-child(3) { --a: #7fb0ff; --b: #3fe0ff; box-shadow: 0 0 22px rgba(63,224,255,.28); }
-
-  /* ─── play: one round of the game, right on the page ─── */
-  .play { padding: clamp(56px, 10vh, 120px) 16px clamp(40px, 6vh, 70px); text-align: center; }
-  .play .kick { margin-top: 16px; }
-  .board { --cw: clamp(68px, 10vw, 128px); position: relative; max-width: 980px; margin: clamp(26px, 4vw, 48px) auto 0; }
-  /* the card in your hand: song shown, year hidden */
-  /* the card in your hand and, once it is laid, the verdict in the same place, so nothing below moves */
-  .hand { height: calc(var(--cw) * 1.25 * 1.48 + 24px); display: grid; place-items: center; }
-  .hand > * { grid-area: 1 / 1; }
-  .pc { position: relative; width: var(--cw); aspect-ratio: 540 / 800; flex: none; font-size: calc(var(--cw) / 12); }
-  .pc .face { position: absolute; inset: 0; border-radius: var(--card-r); overflow: hidden; filter: drop-shadow(0 18px 28px rgba(0,0,0,.5)); }
-  .pc .face img { width: 100%; height: 100%; }
-  .hand .pc { width: calc(var(--cw) * 1.25); font-size: calc(var(--cw) * 1.25 / 12); animation: bob 4s ease-in-out infinite; }
-  @keyframes bob { 0%,100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-8px) rotate(-1deg); } }
-  .hand .pc.enter { animation: dealIn .55s cubic-bezier(.2,.9,.25,1.15) both, bob 4s ease-in-out .55s infinite; }
-  @keyframes dealIn { from { opacity: 0; transform: translateY(40px) scale(.85) rotate(-8deg); } to { opacity: 1; transform: rotate(-3deg); } }
-  /* the year band, covered: the game's own gradient with a question mark, as in the ads */
-  .cov { position: absolute; left: 0; right: 0; top: 0; height: 35.4%; display: grid; place-items: center; transform-origin: 50% 0;
-         background: linear-gradient(115deg, #ff5fd6 0%, #a45cff 45%, #3fd2ff 100%); transition: transform .5s cubic-bezier(.5,0,.2,1), opacity .5s ease; }
-  .cov::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2.2%; min-height: 2px; background: rgba(255,255,255,.55); }
-  .cov b { font: 900 italic 3.2em/1 "Rubik Hitsy", sans-serif; color: #fff; text-shadow: 0 .05em .2em rgba(60,0,90,.45); }
-  .pc.open .cov { transform: perspective(400px) rotateX(-95deg); opacity: 0; }
-  .pc .ring { position: absolute; inset: -3px; border-radius: 13% / 9%; border: 3px solid transparent; pointer-events: none; transition: border-color .3s, box-shadow .3s; }
-  .pc.right .ring { border-color: var(--mint); box-shadow: 0 0 26px rgba(67,232,167,.65); }
-  .pc.wrong .ring { border-color: var(--red); box-shadow: 0 0 26px rgba(255,90,122,.6); }
-  .pc .mark { position: absolute; left: 50%; bottom: -14px; translate: -50% 0; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center;
-              font: 700 17px/1 system-ui, sans-serif; color: #06050f; opacity: 0; scale: .5; transition: opacity .3s, scale .4s cubic-bezier(.2,.9,.25,1.4); }
-  .pc.right .mark { background: var(--mint); opacity: 1; scale: 1; }
-  .pc.wrong .mark { background: var(--red); opacity: 1; scale: 1; }
-
-  /* the timeline you lay it on, with a lit gap between every two cards */
-  .tl { display: flex; align-items: center; justify-content: center; gap: clamp(4px, 1vw, 12px); min-height: calc(var(--cw) * 1.48 + 30px); }
-  .slot { flex: none; width: clamp(30px, 4.4vw, 54px); height: calc(var(--cw) * 1.48); border-radius: 14px; cursor: pointer; position: relative;
-          border: 2px dashed rgba(255,255,255,.28); background: rgba(255,255,255,.04); display: grid; place-items: center;
-          transition: width .3s cubic-bezier(.2,.9,.25,1), border-color .25s, background .25s, box-shadow .25s; }
-  .slot::before { content: "+"; font: 900 italic 24px/1 "Rubik Hitsy", sans-serif; color: rgba(255,255,255,.55); transition: color .25s, transform .25s; }
-  .slot:hover, .slot:focus-visible { width: clamp(44px, 7vw, 92px); border-color: var(--violet); background: rgba(183,123,255,.14); box-shadow: 0 0 28px rgba(183,123,255,.45); outline: none; }
-  .slot:hover::before, .slot:focus-visible::before { color: #fff; transform: scale(1.25); }
-  .slot::after { content: ""; position: absolute; inset: -6px -10px; }   /* a fingertip is wider than the gap */
-  .board.busy .slot { display: none; }
-  .tl .pc { animation: none; }
-
-  .status { display: flex; flex-direction: column; align-items: center; gap: 16px; }
-  .dots { display: flex; justify-content: center; gap: 8px; margin-top: 22px; }
-  .dots i { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,.16); transition: background .3s, box-shadow .3s; }
-  .dots i.right { background: var(--mint); box-shadow: 0 0 10px rgba(67,232,167,.7); }
-  .dots i.wrong { background: var(--red); box-shadow: 0 0 10px rgba(255,90,122,.6); }
-  .dots i.now { background: rgba(255,255,255,.55); }
-  .msg { font: 900 italic clamp(26px, 3.4vw, 44px)/1.05 "Rubik Hitsy", sans-serif; text-transform: uppercase; }
-  .msg:not(:empty) { animation: pop .45s cubic-bezier(.2,.9,.25,1.3) both; }
-  @keyframes pop { from { opacity: 0; transform: scale(.8) translateY(8px); } to { opacity: 1; transform: none; } }
-  .msg.right { color: var(--mint); text-shadow: 0 0 24px rgba(67,232,167,.45); } .msg.wrong { color: var(--red); text-shadow: 0 0 24px rgba(255,90,122,.4); }
-  .msg small { display: block; margin-top: 10px; text-shadow: none; font: 15px/1.4 "Cal Sans", sans-serif; text-transform: none; color: var(--soft); }
-  .next { border: 0; border-radius: 999px; padding: 12px 26px; cursor: pointer; font: 17px/1 "Cal Sans", sans-serif; color: #fff;
-          background: linear-gradient(95deg, #ff6ad9, #b77bff 50%, #3fe0ff); box-shadow: 0 10px 30px rgba(183,123,255,.4);
-          transition: transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s; }
-  .next:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(183,123,255,.55); }
-  .next[hidden] { display: none; }
 
   /* ─── the packs: one long reel of card backs ─── */
   .packs { padding: clamp(48px, 8vh, 100px) 0 clamp(56px, 8vh, 96px); text-align: center; overflow: hidden; }
@@ -238,13 +177,12 @@
     :lang(en) h1 { font-size: 8.8vw; }
     .hero .kick { font-size: 2.3vw; }
     .row { --w: 17vw; }
-    .row .edge, .row .far { display: none; }
+    .row .edge { display: none; }
     .badge img { height: 64px; }
     .act { flex-direction: column; }
     .chips span { font-size: 17px; padding: 11px 18px; }
     h2 { font-size: 9vw; }
     :lang(en) h2 { font-size: 8vw; }
-    .board { --cw: 15vw; }
   }
   @media (max-width: 700px) {
     h1 { font-size: 12.6vw; }
@@ -253,14 +191,10 @@
     :lang(en) h2 { font-size: 8.8vw; }
     .ln { white-space: nowrap; }
     .logo { width: 48vw; }
-    .row { --w: 27vw; }
-    .stage { -webkit-mask: none; mask: none; }
+    .row { --w: 25vw; }
+    .row .side { display: none; }
     .badge img { height: 52px; }
     .chips span { font-size: 13.5px; padding: 8px 13px; }
-    .board { --cw: 19vw; }
-    .slot { width: 22px; border-radius: 10px; }
-    .slot::before { font-size: 18px; }
-    .slot:hover, .slot:focus-visible { width: 34px; }
   }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; animation-delay: 0s !important; transition: none !important; }
@@ -301,15 +235,13 @@
     <div class="stage" id="stage" aria-hidden="true">
       <div class="floor"></div>
       <div class="row" id="row">
-        <div class="card far"><img data-year="1967" alt=""></div>
         <div class="card edge"><img data-year="1972" alt=""></div>
-        <div class="card"><img data-year="1976" alt=""></div>
+        <div class="card side"><img data-year="1976" alt=""></div>
         <div class="card"><img data-year="1984" alt=""></div>
         <div class="card mystery lit"><img src="assets/backs/hits.webp" alt=""></div>
         <div class="card"><img data-year="1995" alt=""></div>
-        <div class="card"><img data-year="2003" alt=""></div>
+        <div class="card side"><img data-year="2003" alt=""></div>
         <div class="card edge"><img data-year="2013" alt=""></div>
-        <div class="card far"><img data-year="2023" alt=""></div>
       </div>
     </div>
 
@@ -323,24 +255,6 @@
     </div>
   </section>
 
-  <section class="play" id="play">
-    <h2 class="reveal">
-      <span class="ln plain" data-i18n="q1">Var hamnar</span>
-      <span class="ln accent"><span class="gw" data-i18n="q2">låten?</span></span>
-    </h2>
-    <p class="kick reveal" data-i18n="qk">Tryck där kortet ska ligga på tidslinjen</p>
-    <div class="board reveal" id="board">
-      <div class="hand">
-        <div class="held" id="hand"></div>
-        <div class="status">
-          <div class="msg" id="msg" aria-live="polite"></div>
-          <button type="button" class="next" id="next" hidden></button>
-        </div>
-      </div>
-      <div class="tl" id="tl"></div>
-      <div class="dots" id="dots"><i></i><i></i><i></i><i></i><i></i></div>
-    </div>
-  </section>
 
   <section class="packs">
     <h2 class="reveal">
@@ -377,12 +291,6 @@
   const T = {
     sv: { h1a: 'Hör låten.', h1b: 'Gissa året.', kick: 'Lyssna på låten. Gissa året. Vinn.',
           c1: '4 000+ kort', c2: '10+ kortlekar', c3: '2–6 spelare',
-          q1: 'Var hamnar', q2: 'låten?', qk: 'Tryck där kortet ska ligga på tidslinjen',
-          right: 'Rätt!', wrong: 'Fel år', was: (y) => `Den kom ${y}`, keep: 'Kortet är ditt',
-          next: 'Nästa låt', again: 'Spela igen',
-          end: (n) => n >= 4 ? `${n} av 5. Snyggt!` : n >= 2 ? `${n} av 5. Inte illa` : `${n} av 5. Det var svårt, va?`,
-          endSub: 'I appen hör du låten, och 4 000+ kort väntar',
-          before: (a) => `Före ${a}`, between: (a, b) => `Mellan ${a} och ${b}`, after: (b) => `Efter ${b}`,
           p1: 'En kortlek', p2: 'för varje fest', free: 'Hits-kortleken är alltid gratis · Första matchen i varje kortlek är gratis',
           support: 'Support', privacy: 'Integritetspolicy',
           legal: 'Hitsy görs av Emil Alexander Lindgren, enskild firma i Sverige · Momsnr SE010420021701',
@@ -390,12 +298,6 @@
           badge: 'Hämta i App Store', title: 'Hitsy – Hör låten. Gissa året.' },
     en: { h1a: 'Hear the song.', h1b: 'Guess the year.', kick: 'Listen. Guess the year. Win.',
           c1: '4,000+ cards', c2: '10+ packs', c3: '2–6 players',
-          q1: 'Where does', q2: 'it go?', qk: 'Tap where the card belongs on the timeline',
-          right: 'Right!', wrong: 'Wrong year', was: (y) => `It came out in ${y}`, keep: 'The card is yours',
-          next: 'Next song', again: 'Play again',
-          end: (n) => n >= 4 ? `${n} out of 5. Nice!` : n >= 2 ? `${n} out of 5. Not bad` : `${n} out of 5. Tricky, right?`,
-          endSub: 'In the app you hear the song, and 4,000+ cards are waiting',
-          before: (a) => `Before ${a}`, between: (a, b) => `Between ${a} and ${b}`, after: (b) => `After ${b}`,
           p1: 'A pack', p2: 'for every party', free: 'The Hits pack is always free · Your first game of every pack is free',
           support: 'Support', privacy: 'Privacy Policy',
           legal: 'Hitsy is made by Emil Alexander Lindgren, a sole trader in Sweden · VAT no. SE010420021701',
@@ -414,7 +316,6 @@
     document.querySelectorAll('[data-badge]').forEach((el) => { el.src = `assets/badge/appstore_${l}.svg`; el.alt = d.badge; el.parentElement.setAttribute('aria-label', d.badge); });
     document.querySelectorAll('[data-set-lang]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.setLang === l)));
     try { localStorage.setItem('hitsy.lang', l); } catch (e) {}
-    if (window.game) game.relabel();
   }
   document.querySelectorAll('[data-set-lang]').forEach((b) => b.addEventListener('click', () => setLang(b.dataset.setLang)));
   try { lang = localStorage.getItem('hitsy.lang'); } catch (e) {}
@@ -430,111 +331,6 @@
       row.style.setProperty('--rx', (-y * 8).toFixed(2) + 'deg');
     });
   }
-
-  // ─── one round of the game: place five songs on a three-card timeline ───
-  window.game = (() => {
-    const BASE = [1967, 1984, 2003];
-    const POOL = [1972, 1976, 1982, 1990, 1995, 1997, 2008, 2011, 2013, 2020];
-    const ROUNDS = 5;
-    const board = document.getElementById('board'), hand = document.getElementById('hand'), tl = document.getElementById('tl');
-    const dots = [...document.querySelectorAll('#dots i')], msg = document.getElementById('msg'), next = document.getElementById('next');
-    let deck = [], round = 0, score = 0, current = null, done = false, last = null;
-
-    const cardHTML = (y, covered) => `<div class="pc${covered ? '' : ' open'}" data-y="${y}"><div class="face"><img src="${front(y)}" alt=""><div class="cov"><b>?</b></div></div><span class="ring"></span><span class="mark"></span></div>`;
-    // which gap a year belongs in: 0 before the first card, BASE.length after the last
-    const gapOf = (y) => BASE.filter((b) => b < y).length;
-    function shuffled() {
-      // five songs that between them land in at least three different gaps, so it is not the same answer every time
-      for (;;) {
-        const d = [...POOL].sort(() => Math.random() - .5).slice(0, ROUNDS);
-        if (new Set(d.map(gapOf)).size >= 3) return d;
-      }
-    }
-    function slotLabel(g) {
-      const d = T[lang];
-      return g === 0 ? d.before(BASE[0]) : g === BASE.length ? d.after(BASE[g - 1]) : d.between(BASE[g - 1], BASE[g]);
-    }
-    function layTimeline() {
-      let h = '';
-      BASE.forEach((y, i) => { h += `<button type="button" class="slot" data-gap="${i}" aria-label="${slotLabel(i)}"></button>` + cardHTML(y, false); });
-      h += `<button type="button" class="slot" data-gap="${BASE.length}" aria-label="${slotLabel(BASE.length)}"></button>`;
-      tl.innerHTML = h;
-      tl.querySelectorAll('.slot').forEach((s) => s.addEventListener('click', () => place(+s.dataset.gap, s)));
-    }
-    function deal() {
-      board.classList.remove('busy');
-      msg.className = 'msg'; msg.textContent = ''; next.hidden = true; last = null;
-      layTimeline();
-      current = deck[round];
-      hand.innerHTML = cardHTML(current, true);
-      hand.firstElementChild.classList.add('enter');
-      dots.forEach((d, i) => d.classList.toggle('now', i === round));
-    }
-    function place(gap, slot) {
-      if (board.classList.contains('busy')) return;
-      const card = hand.firstElementChild, first = card.getBoundingClientRect();
-      // the card goes into the timeline where the gap was, and the move is played from where it was (FLIP)
-      card.classList.remove('enter'); card.style.animation = 'none';
-      slot.replaceWith(card);
-      board.classList.add('busy');
-      const lastR = card.getBoundingClientRect();
-      const dx = first.left + first.width / 2 - (lastR.left + lastR.width / 2), dy = first.top + first.height / 2 - (lastR.top + lastR.height / 2);
-      card.animate([{ transform: `translate(${dx}px, ${dy}px) scale(${first.width / lastR.width}) rotate(-3deg)` }, { transform: 'none' }],
-                   { duration: 560, easing: 'cubic-bezier(.2,.9,.25,1.05)' });
-      const ok = gapOf(current) === gap;
-      setTimeout(() => card.classList.add('open'), 600);
-      setTimeout(() => {
-        card.classList.add(ok ? 'right' : 'wrong');
-        card.querySelector('.mark').textContent = ok ? '✓' : '✕';
-        dots[round].classList.remove('now'); dots[round].classList.add(ok ? 'right' : 'wrong');
-        if (ok) score++;
-        last = ok;
-        showResult();
-        if (!ok) setTimeout(() => slideHome(card), 900);
-        round++;
-        if (round >= ROUNDS) setTimeout(finish, 1400);
-        else { next.textContent = T[lang].next; next.hidden = false; }
-      }, 1150);
-    }
-    // a wrong card glides on to where it belongs, so you see the right answer on the timeline itself
-    function slideHome(card) {
-      const before = [...tl.querySelectorAll('.pc')].find((c) => c !== card && +c.dataset.y > current);
-      const from = card.getBoundingClientRect();
-      if (before) tl.insertBefore(card, before); else tl.appendChild(card);
-      const to = card.getBoundingClientRect();
-      if (Math.abs(from.left - to.left) < 2) return;
-      card.animate([{ transform: `translate(${from.left - to.left}px, -18px) rotate(-4deg)` }, { transform: 'none' }],
-                   { duration: 650, easing: 'cubic-bezier(.3,.8,.25,1)' });
-    }
-    function showResult() {
-      const d = T[lang];
-      msg.className = 'msg ' + (last ? 'right' : 'wrong');
-      msg.innerHTML = `${last ? d.right : d.wrong}<small>${last ? d.keep : d.was(current)}</small>`;
-    }
-    function finish() {
-      const d = T[lang];
-      done = true;
-      msg.className = 'msg';
-      msg.innerHTML = `${d.end(score)}<small>${d.endSub}</small>`;
-      next.textContent = d.again; next.hidden = false;
-    }
-    function start() {
-      deck = shuffled(); round = 0; score = 0; done = false;
-      dots.forEach((d) => { d.className = ''; });
-      deal();
-    }
-    next.addEventListener('click', () => (done ? start() : deal()));
-    start();
-    return {
-      // a language switch swaps the card faces and the words, and keeps the round where it is
-      relabel() {
-        document.querySelectorAll('.pc').forEach((pc) => { pc.querySelector('img').src = front(pc.dataset.y); });
-        tl.querySelectorAll('.slot').forEach((s) => s.setAttribute('aria-label', slotLabel(+s.dataset.gap)));
-        if (done) finish();
-        else if (last !== null) { showResult(); next.textContent = T[lang].next; }
-      },
-    };
-  })();
 
   // reveal on scroll
   const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .15 });
